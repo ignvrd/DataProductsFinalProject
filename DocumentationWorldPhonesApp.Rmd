@@ -1,0 +1,37 @@
+---
+title: "WorldPhoneDocumentation"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+This example shiny app has been though as an example to use plotting, text and reactive programming combinig together with as less requirements as possible.
+The app use the WorldPhone dataset which it is included by default in R. This dataset show from several years and regions the number of phones availables.
+The app will allow the user to select the region that the app will show. Additional the app will calculate a regression model and,let the user use the model to predict the number of phones
+The app has a tab with the documentation and another tab (called regression) with the results
+
+## How to use it                                    
+The app expects several inputs to manipulate. The results appears in the result tab.
+The inputs are:
+1.The region from which the data will be loaded
+2.If the user requires prediction
+3.The yer of the prediction to use
+4.A set of visualization options, including the x and y axis and the title
+
+```{r echo=FALSE}
+years <- c(1951,1956,1957,1958,1959,1960,1961)
+plot(WorldPhones[ ,"Europe"] ~ years, xlab = "years for Europe", ylab = "Phones in Europe",main = "Regression Phones vs Years for: Europe")
+model<-lm(WorldPhones[ ,"Europe"] ~ years)
+abline(model)
+```
+
+## Technical details
+Technicaly the app is a Shiny web app. The server part is based in the selection of particular data form the WorldPhone dataset and the construction of simple linear regression models upon these data. Based in the model an extrapolation is done with a specific year given by the user
+
+        
+

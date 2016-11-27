@@ -1,0 +1,51 @@
+---
+title: "WorldPhones 
+        Data Product Pitch"
+date: 2016, 26 November
+output: ioslides_presentation
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+## WordPhones
+WordPhones is a dataset included in R by default. It provides information about phone distributions along different regions. 
+```{r , echo = FALSE}
+head(WorldPhones,n=2)
+```
+The proposed app use the data for each region through a diversity of year to fit a basic
+linear model with the objective to predict the number of phones in future years
+
+The application does not require any special requirement of imports from the user computer
+
+## Available tabs: Documentation
+The app is documenting covering three aspects:
+
+* An introduction to the data set that has been used
+* How the application should be used
+* The technical details of the application
+
+## Available tabs: Regresion
+In this tab will be plotted the result of the model with the fitted line covering the regression line
+```{r , echo = FALSE, comment=""}
+years <- c(1951,1956,1957,1958,1959,1960,1961)
+model<-lm(WorldPhones[ ,"Europe"] ~ years)
+plot(WorldPhones[ ,"Europe"] ~ years, xlab = "years for Europe", ylab = "Phones in Europe",main = "Regression Phones vs Years for: Europe")
+abline(model)
+```
+
+Additionally, The tab printed the results the model foreseen for the selected year 
+
+## Conclusions
+The app is a simple application for regression and prediction, using reactive programming and interactivity with the user. This interactivity allows the user to control, both the resultand the presentation.
+
+*Presentation*: There are three checks that controls the printing of the title, and the x,y legends. The checkboxes allow the user to select if the legends will appear
+
+*Behavior*: The fit of the model is done in each case, but the selection of the region determine the data to be used. The user may select if a prediction is rquired and the year for that prediction for the selected region. For instance,for Europe, year 2000:
+
+```{r , echo = FALSE, comment=""}
+prediction <- model$coefficients[1]+model$coefficients[2]*2000
+prediction
+```
+
+
+
